@@ -2,6 +2,7 @@
 
 import argparse
 import socket
+import ipaddress
 
 '''
 Put your name inside the function that you are going to code, as a comment. 
@@ -23,11 +24,27 @@ def read_args():
 
 
 def ip_valid(ip_string):
-    # Team Member Name - 
+    # Team Member Name - Ranjan Ghorsaini
     # takes 1 argument, a string 
-    # returns boolean - True if valid, False not valid
     # Function checks if ip_string argument is a valid ip address or hostname
-    pass
+    # First, it will checks if it's a valid IP using the ipaddress module.
+    # If that fails, it tries to resolve it as a hostname using socket.
+    # returns boolean - True if valid, False not valid
+
+
+    # Check if it's a valid IP address
+    try:
+        ipaddress.ip_address(ip_string)
+        return True
+    except ValueError:
+        pass  # It's not a valid IP
+
+    # Check if it's a valid hostname
+    try:
+        socket.gethostbyname(ip_string)
+        return True
+    except socket.error:
+        return False       # It's not a valid ip or hostname
 
 
 def define_ports(port_string):
