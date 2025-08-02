@@ -48,12 +48,25 @@ def ip_valid(ip_string):
 
 
 def define_ports(port_string):
-    # Team Member Name - 
+    # Team Member Name - Tirth Shah 
     # take 1 argument, a string 
     # returns a list
     # Function converts port_string to a list 
     # port_string could be a single port or a multiple ports seperated by commas, eg '80' or '20,22,23' 
     # if port_string is not valid then return an error message
+    ports = port_string.split(',')  # Split string by comma
+    port_list = []  # Empty list to store valid ports
+
+    for port in ports:
+        port = port.strip()  # Remove any extra spaces
+        if not port.isdigit():  #Checks if the number is correct or not
+            return "Error: One or more ports are not valid numbers."
+        port_num = int(port)     #Checks if the port is within the desired range
+        if port_num < 1 or port_num > 65535:
+            return "Error: Port numbers must be between 1 and 65535."
+        port_list.append(port_num)  # Add valid port to list
+
+    return port_list
     pass
 
 
