@@ -12,7 +12,7 @@ so that we can test our functions with out waiting for other functions to comple
 '''
 
 def read_args():
-    # Team Member Name - 
+    # Team Member Name - Lalit Budhathoki 
     # takes no arguments, as these will be taken from the command line/terminal 
     # returns a list
     # Function uses ‘argparse’ module to get the arguments passed when running the script in the terminal.
@@ -20,7 +20,38 @@ def read_args():
     # option - add timeout argument later, if time
     # on the terminal running 'python3 ./assignment2.py 127.0.0.1 80' should return a list ['127.0.0.1', '80'] from this function.
     # running 'python3 ./assignment2.py 127.0.0.1 80,23,25' should return a list ['127.0.0.1', '80,23,25']
-    pass 
+   
+   # Create an ArgumentParser object with a description
+    parser = argparse.ArgumentParser(description="Network Port Scanner")
+
+    # Required IP argument
+    parser.add_argument("ip", help="Target IP address or hostname to scan")
+
+    # Required ports list
+    parser.add_argument("ports", help="Comma-separated list of ports to scan")
+
+    # Optional timeout argument
+    parser.add_argument("--timeout", type=float, default=0.5, help="Connection timeout in seconds (default: 0.5)")
+
+    args = parser.parse_args()
+
+    # Validate IP address format
+    try:
+        socket.gethostbyname(args.ip)
+    except socket.error:
+        parser.error("Invalid IP address or hostname.")
+
+    # Parse and validate ports list
+    try:
+        port_list = [int(p) for p in args.ports.split(",")]
+    except ValueError:
+        parser.error("Ports must be comma-separated integers (e.g., 80,443,8080)")
+
+    for port in port_list:
+        if port < 1 or port > 65535:
+            parser.error(f"Port {port} is out of valid range (1–65535)")
+
+    return args.ip, port_list, args.timeout
 
 
 def ip_valid(ip_string):
@@ -58,12 +89,19 @@ def define_ports(port_string):
 
 
 def scan_port(ip_string, port_int, timeout = 1):
-    # Team Member Name - 
+    # Team Member Name - Lalit Budhathoki 
     # take 3 arguments, ip_string=string, port_int=integer, timeout=integer
     # returns Boolean - True if port is open, False if closed
     # default for timeout is 1 second
     # attempts a socket connection using ‘socket’ module 
-    pass
+    try:
+# Create a TCP socket connection
+        with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
+            s.settimeout(timeout) # Set timeout for the socket
+            result = s.connect_ex((ip_string, port_int))
+            return result == 0 # Return True if port is open
+    except socket.error:
+             return False  # Return False if connection fails
 
 
 def make_report(ip_string, ports_list, port_statuses):
@@ -75,12 +113,13 @@ def make_report(ip_string, ports_list, port_statuses):
 
 
 if __name__ == '__main__':
-    # Temp testing code
- 
-# read_args() testing has to be done by running script in terminal with arguments
-    # running 'python3 ./assignment2.py 127.0.0.1 80' should return a list ['127.0.0.1', '80']
-    print("read_args() test: output should be ['127.0.0.1', '80'] -->", read_args())
-    print()
+    # For read_args and scan_ports by Lalit Budhathoki
+    ip, ports, timeout = read_args()
+     # Scan and print status of each port
+    for port in ports:
+        result = scan_port(ip, port, timeout)
+        print(f"Port {port}: {'Open' if result else 'Closed'}") 
+
 
 
     # Other functions can be tested without running assignment2.py script with arguments
