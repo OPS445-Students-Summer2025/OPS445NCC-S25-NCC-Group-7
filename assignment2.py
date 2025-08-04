@@ -118,11 +118,25 @@ def scan_port(ip_string, port_int, timeout = 1):
 
 
 def make_report(ip_string, ports_list, port_statuses):
-    # Team Member Name - 
+    # Team Member Name - John Cherubini
     # take 3 arguments, string, list, list
     # returns nothing - prints report
     # Function formats data into a report and prints it to terminal
-    pass
+
+    print("\nScanned IP address: ", ip_string)
+    print("-------------------------------")
+    ports = 0
+    while ports < len(ports_list):
+        port = ports_list[ports]
+        if port_statuses[ports]:
+            state = "Open"
+        else:
+            state = "Closed"
+        print("Port " + str(port) + ": " + state)
+        print("")
+        ports += 1
+
+
 
 
 if __name__ == '__main__':
