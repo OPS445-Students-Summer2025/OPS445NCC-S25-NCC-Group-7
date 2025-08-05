@@ -34,7 +34,7 @@ def read_args():
     parser.add_argument("--timeout", type=float, default=0.5, help="Connection timeout in seconds (default: 0.5)")
 
     args = parser.parse_args()
-    return args.ip, port_list, args.timeout
+    return args.ip, args.ports, args.timeout
 
 
 def ip_valid(ip_string):
