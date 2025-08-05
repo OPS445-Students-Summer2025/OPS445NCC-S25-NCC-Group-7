@@ -123,19 +123,24 @@ def make_report(ip_string, ports_list, port_statuses):
     # returns nothing - prints report
     # Function formats data into a report and prints it to terminal
 
-    print("\nScanned IP address: ", ip_string)
-    print("-------------------------------")
-    ports = 0
-    while ports < len(ports_list):
-        port = ports_list[ports]
-        if port_statuses[ports]:
-            state = "Open"
-        else:
-            state = "Closed"
-        print("Port " + str(port) + ": " + state)
-        print("")
-        ports += 1
+    print("\nGROUP 7 -- OPS445 -- PROJECT 2")
+    print("Chosen IP address: ", ip_string)
+    print("_______________________________\n")
 
+
+    ports = 0                       # Set at initial index value
+    while ports < len(ports_list):  # Loop until every port in ports_list has been processed
+        Port = ports_list[ports]    # Retreive port number at current index
+        if port_statuses[ports]:
+            state = "Open     ✅"
+        else:
+            state = "Closed   ❌"
+
+
+        print("Port " + str(Port) + ": " + state)
+        ports += 1
+    print("_______________________________")
+    print("\nEND OF REPORT\n\n")
 
 
 
