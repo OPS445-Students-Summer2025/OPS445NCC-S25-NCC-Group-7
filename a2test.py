@@ -2,6 +2,7 @@
 
 from assignment2 import *
 import argparse
+# Team Member Name - Sandra Foster
 
 '''
 This script is to test the individual functions of assignment2 with out having to have all of the other functions complete
@@ -33,14 +34,18 @@ args = parser.parse_args()
 
 def test_read_args():
     print('read_args() testing has to be done by running script in terminal with arguments')
+    print('This was for testing before the main was written, and is not necessary now')
     print("running 'python3 ./assignment2.py 127.0.0.1 80' should return a list ['127.0.0.1', '80']")
     print()
 
 def test_ip_valid():
     # ip_valid() testing
-    print('ip_valid() test: output should be "True" -->', ip_valid('127.0.0.1'))        # valid ip address
-    print('ip_valid() test: output should be "False" -->', ip_valid('127.0.0'))         # invalid ip address
-    print('ip_valid() test: output should be "True" -->', ip_valid('scanme.nmap.org'))  # valid hostname
+    print('ip_valid() test: 127.0.0.1 - output should be "True" -->', ip_valid('127.0.0.1'))        # valid ip address
+    print('ip_valid() test: 127.0.0 - output should be "False" -->', ip_valid('127.0.0'))         # invalid ip address
+    print('ip_valid() test: 12700 - output should be "False" -->', ip_valid('12700'))         # invalid ip address
+    print('ip_valid() test: scanme.nmap.org - output should be "True" -->', ip_valid('scanme.nmap.org'))  # valid hostname
+    print('ip_valid() test: scanmenmaporg - output should be "False" -->', ip_valid('scanmenmaporg'))  # valid hostname
+
     print()
 
 def test_define_ports():
@@ -48,7 +53,7 @@ def test_define_ports():
     print('define_ports() test: output should be [80] -->', define_ports('80'))
     print('define_ports() test: output should be Error message -->', define_ports('not a port'))
     # multi port test 
-    print('define_ports() test: output should be [22, 23, 25] -->', define_ports('20,23,25'))
+    print('define_ports() test: output should be [20, 23, 25] -->', define_ports('20,23,25'))
     print()
 
 def test_scan_port():
