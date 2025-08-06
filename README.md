@@ -47,9 +47,16 @@ Sandra Foster:
 
 <br>
 
-```read_args() ```   
-Lalit:  
-<br>
+```read_args()```
+Lalit Budhathoki:
+
+This function uses the `argparse` module to read terminal arguments passed to the script.  
+It accepts:
+- `ip`: Target IP address or hostname 
+- `ports`: Comma-separated list of ports to scan 
+- `timeout`: Timeout value of 0.5 seconds
+
+It returns: `(ip, ports, timeout)`  
 
 ```ip_valid()```  
 Ranjan:  
@@ -59,9 +66,19 @@ Ranjan:
 Tirth:  
 <br>  
 
-```scan_port()```  
-Lalit:  
-<br>
+```scan_port()```
+Lalit Budhathoki:
+
+This function attempts to connect to a given port on a given IP address using the `socket` module.  
+It accepts:
+- `ip_string`: Target IP address or hostname
+- `port_int`: Port number to check
+- `timeout`: Time to wait for a response ( 1 second)
+
+It returns
+`True`: If the port is open.
+`False`:If the port is closed or unreachable.
+
 
 ```make_report()```  
 John: 
