@@ -11,7 +11,7 @@
 ## What is it? :woman_technologist: :artificial_satellite:
 This is a Python based network port scanner. It takes in terminal arguments of an IP address or hostname, a list of ports, and an optional timeout. It scans the specified ports of the given IP address/hostname, and prints a report to the command line whether the ports are open or closed.   
 
-This was completed, in an Linux environment, as part of a group project, for OPS445, at Seneca Polytechnic. 
+This was completed, in a Linux environment, as part of a group project, for OPS445, at Seneca Polytechnic. 
 
 ## Installation :hammer_and_wrench:  
 [![My Skills](https://skillicons.dev/icons?i=py)](https://www.python.org/) Install python3 in your coding environment.
@@ -79,8 +79,10 @@ It returns
 `True`: If the port is open.
 `False`:If the port is closed or unreachable.
 
+
 ```make_report()```  
 John: 
+<br>
 
 
 
@@ -96,7 +98,7 @@ Full instructions on how to use this script are commented inside the file.
 ```a2_test_samples.txt```  
 Sandra Foster:   
 
-This text document contains example command line prompts for testing the completed assignment 2. It provides different prompts that should run either successfully or with error codes.
+This text document contains example command line prompts for testing the completed assignment 2. It provides different prompts that are designed to either run successfully or with error codes.
 ## Contributors:
 Sandra Foster  
 Lalit Budhathoki  
@@ -104,7 +106,7 @@ Ranjan Ghorsaini
 Tirth Shah  
 John Cherubini
 
-## References:
+## Research and References:
 
 - Great website for responsible and permitted network scanning practise:  
 
@@ -135,6 +137,11 @@ https://docs.python.org/3/library/ipaddress.html
 
 https://docs.python.org/3/howto/ipaddress.html  
 <br>  
+
+- OPS445 Lecture Slides - Eric Brauer:  
+
+https://ericbrauer.github.io/ops445/index.html  
+<br>
 
 - How to create a GitHub README:   
 
