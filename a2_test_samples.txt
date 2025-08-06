@@ -1,0 +1,36 @@
+Sample texts for testing Assignment 2.
+    Check pwd is the assigment2 directory.
+    Copy and paste the lines into terminal.
+
+    To open a port on your computer for temporary testing:
+     - in a new terminal run this code 'python3 -m http.server 8000'
+     - After testing type CTRL+C, in other terminal to stop process
+
+    working lines should run the script OK without error codes
+    error lines should return error codes to the terminal
+    maybe lines try to scan your home router and might not work, depending on your network configuration
+
+** working **
+
+python3 ./assignment2.py scanme.nmap.org 80,23,25
+python3 ./assignment2.py scanme.nmap.org 80,23,25 --timeout 5
+python3 ./assignment2.py google.ca 80
+
+python3 ./assignment2.py 127.0.0.1 80,23,8000
+python3 ./assignment2.py 127.0.0.1 80
+
+** Error **
+
+python3 ./assignment2.py scanme.nmaporg 80,23,25
+python3 ./assignment2.py scanme.nmap.org 80,23,25 --timeout five
+python3 ./assignment2.py 1270.0.0.1 80,23,8000
+python3 ./assignment2.py 127.0.0 80,23,8000
+python3 ./assignment2.py 127.0.0.1 80238000
+python3 ./assignment2.py 127.0.0.1 80, 23, 8000
+
+** Maybe **
+
+python3 ./assignment2.py 192.168.0.1 80,443,53,67,68
+python3 ./assignment2.py 192.168.1.1 80,443,53,67,68
+python3 ./assignment2.py 10.0.0.1 80,443,53,67,68
+

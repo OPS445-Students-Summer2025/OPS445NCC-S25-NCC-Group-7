@@ -5,11 +5,12 @@ import socket
 import ipaddress
 
 '''
-Put your name inside the function that you are going to code, as a comment. 
-Comments in functions are there as guides, change them as necessary. 
-Main block has test code and instructions for testing the functions,
-so that we can test our functions with out waiting for other functions to complete.
+Network Port Scanner
+
+    sample text for testing program in a2_test_samples.txt
+    to test individual funtions run a2test.py 
 '''
+
 
 def read_args():
     # Team Member Name - Lalit Budhathoki 
@@ -62,13 +63,25 @@ def ip_valid(ip_string):
 
 
 def define_ports(port_string):
-    # Team Member Name - 
+    # Team Member Name - Tirth Shah 
     # take 1 argument, a string 
     # returns a list
     # Function converts port_string to a list 
     # port_string could be a single port or a multiple ports seperated by commas, eg '80' or '20,22,23' 
     # if port_string is not valid then return an error message
-    pass
+    ports = port_string.split(',')  # Split string by comma
+    port_list = []  # Empty list to store valid ports
+
+    for port in ports:
+        port = port.strip()  # Remove any extra spaces
+        if not port.isdigit():  #Checks if the number is correct or not
+            return "Error: One or more ports are not valid numbers."
+        port_num = int(port)     #Checks if the port is within the desired range
+        if port_num < 1 or port_num > 65535:
+            return "Error: Port numbers must be between 1 and 65535."
+        port_list.append(port_num)  # Add valid port to list
+
+    return port_list
 
 
 def scan_port(ip_string, port_int, timeout = 1):
@@ -88,41 +101,58 @@ def scan_port(ip_string, port_int, timeout = 1):
 
 
 def make_report(ip_string, ports_list, port_statuses):
-    # Team Member Name - 
+    # Team Member Name - John Cherubini
     # take 3 arguments, string, list, list
     # returns nothing - prints report
     # Function formats data into a report and prints it to terminal
-    pass
+
+    print("\nGROUP 7 -- OPS445 -- PROJECT 2")
+    print("Chosen IP address: ", ip_string)
+    print("_______________________________\n")
+
+
+    ports = 0                       # Start at the first index of ports_list
+    while ports < len(ports_list):  # Loop until every port in ports_list has been processed
+        port = ports_list[ports]    # Retreive port number at current index
+        if port_statuses[ports]:
+            state = "Open     ✅"
+        else:
+            state = "Closed   ❌"
+
+
+        print("Port " + str(port) + ": " + state)
+        ports += 1
+    print("_______________________________")
+    print("\nEND OF REPORT\n\n")
+
 
 
 if __name__ == '__main__':
-    # For read_args and scan_ports by Lalit Budhathoki
-    ip, ports, timeout = read_args()
-     # Scan and print status of each port
-    for port in ports:
-        result = scan_port(ip, port, timeout)
-        print(f"Port {port}: {'Open' if result else 'Closed'}") 
+    # Team Member Name - Sandra Foster
+    
+    # get arguments from terminal
+    ip_string, port_string, timeout = read_args()
 
+    # check if ip address or hostname is valid
+    if ip_valid(ip_string) == False:
+        # print error if ip or host is invalid
+        print('Error: Invalid ip address or hostname')
+    else:
+        # validate and format ports argument
+        port_list = define_ports(port_string)
+        if 'Error' in port_list: # if define_ports() returns error code, print error code
+            print(port_list)
+        else:
+            # print statement so that user knows it is working 
+            print(f'Scanning {ip_string}: ... please wait')
 
+            # empty list for status of ports
+            port_statuses = []
 
-    # Other functions can be tested without running assignment2.py script with arguments
-    # (pwd is the assigment2 directory)
+            # loop through ports, checking status of each one
+            for port in port_list:
+                port_statuses.append(scan_port(ip_string, port, timeout))
 
-# ip_valid() testing
-    # run 'python3 a2test.py ip_valid' in terminal
-
-# define_ports() testing
-    # run 'python3 a2test.py define_ports' in terminal
-
-# scan_port() testing
-    # run 'python3 a2test.py scan_port' in terminal
-    # To open a port on your computer for temporary testing:
-    # - in a new terminal run this code 'python3 -m http.server 8000'
-    # - After testing type CTRL+C, in other terminal to stop process
-
-# make_report() testing
-    # run 'python3 a2test.py make_report' in terminal
-
-# test all
-    # run 'python3 a2test.py all' in terminal
-
+            # print report to terminal
+            make_report(ip_string, port_list, port_statuses)
+        

@@ -57,7 +57,6 @@ It accepts:
 - `timeout`: Timeout value of 0.5 seconds
 
 It returns: `(ip, ports, timeout)`  
-<br>
 
 ```ip_valid()```  
 Ranjan:  
