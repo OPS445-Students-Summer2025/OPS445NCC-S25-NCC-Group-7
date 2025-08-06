@@ -31,28 +31,11 @@ def read_args():
     # Required ports list
     parser.add_argument("ports", help="Comma-separated list of ports to scan")
 
-    # Optional timeout argument
+    # timeout argument
     parser.add_argument("--timeout", type=float, default=0.5, help="Connection timeout in seconds (default: 0.5)")
 
     args = parser.parse_args()
-
-    # Validate IP address format
-    try:
-        socket.gethostbyname(args.ip)
-    except socket.error:
-        parser.error("Invalid IP address or hostname.")
-
-    # Parse and validate ports list
-    try:
-        port_list = [int(p) for p in args.ports.split(",")]
-    except ValueError:
-        parser.error("Ports must be comma-separated integers (e.g., 80,443,8080)")
-
-    for port in port_list:
-        if port < 1 or port > 65535:
-            parser.error(f"Port {port} is out of valid range (1–65535)")
-
-    return args.ip, port_list, args.timeout
+    return args.ip, args.ports, args.timeout
 
 
 def ip_valid(ip_string):
