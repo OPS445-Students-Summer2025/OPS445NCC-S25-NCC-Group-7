@@ -111,16 +111,16 @@ def make_report(ip_string, ports_list, port_statuses):
     print("_______________________________\n")
 
 
-    ports = 0                       # Set at initial index value
+    ports = 0                       # Start at the first index of ports_list
     while ports < len(ports_list):  # Loop until every port in ports_list has been processed
-        Port = ports_list[ports]    # Retreive port number at current index
+        port = ports_list[ports]    # Retreive port number at current index
         if port_statuses[ports]:
             state = "Open     ✅"
         else:
             state = "Closed   ❌"
 
 
-        print("Port " + str(Port) + ": " + state)
+        print("Port " + str(port) + ": " + state)
         ports += 1
     print("_______________________________")
     print("\nEND OF REPORT\n\n")
